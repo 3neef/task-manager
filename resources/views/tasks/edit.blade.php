@@ -1,14 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Creating A new Task') }}
+            {{ __('Updating A Task') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <form method="POST" action="{{route('task.store')}}">
+            <form method="POST" action="{{route('task.update', $task->id)}}">
+                @method('PUT')
                 @csrf
                 <div class="border-b border-gray-900/10 pb-12">
                     <h2 class="text-base font-semibold leading-7 text-gray-900">Task Information</h2>
@@ -20,7 +21,7 @@
                             <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Task
                                 name</label>
                             <div class="mt-2">
-                                <input type="text" name="name" id="name" autocomplete="given-name"
+                                <input type="text" name="name" id="name" value="{{$task->name}}" autocomplete="given-name"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -29,7 +30,7 @@
                             <label for="deadline" class="block text-sm font-medium leading-6 text-gray-900">Task
                                 deadline</label>
                             <div class="mt-2">
-                                <input type="date" name="deadline" id="deadline" autocomplete="family-name"
+                                <input type="date" name="deadline" id="deadline" value="{{$task->deadline}}" autocomplete="family-name"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
@@ -37,7 +38,7 @@
                         <div class="col-span-full">
                             <label for="discription" class="block text-sm font-medium leading-6 text-gray-900">Task discription</label>
                             <div class="mt-2">
-                              <textarea id="discription" name="discription" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                              <textarea id="discription" name="discription" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{$task->discription}}</textarea>
                             </div>
                             <p class="mt-3 text-sm leading-6 text-gray-600">Explain the task in details</p>
                           </div>
@@ -46,7 +47,7 @@
                             <label for="type"
                                 class="block text-sm font-medium leading-6 text-gray-900">Task Type</label>
                             <div class="mt-2">
-                                <select id="type" name="type" autocomplete="type"
+                                <select id="type" name="type" autocomplete="type" value="{{$task->type}}"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                     <option value="urgent">Urgent</option>
                                     <option value="medium">Medium</option>

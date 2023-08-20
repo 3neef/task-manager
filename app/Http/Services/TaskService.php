@@ -11,20 +11,19 @@ class TaskService
 
     public  static function store($request)
     {
-        // dd($request->all());
         $task = Task::create($request->validated());
         return $task;
     }
-    public  static function update($request)
+    public function update($request, $task)
     {
-        $task = Task::update($request->validated());
+        $task->update($request->validated());
         return $task;
     }
 
 
-    // public  static function show($request)
-    // {
-    //     $brand = VechileColor::all();
-    //     return $brand;
-    // }
+    public  static function destroy($task)
+    {
+        $task->delete();
+        return $task;
+    }
 }

@@ -19,9 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [TaskController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,6 +28,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/task/create', [TaskController::class, 'create'])->name('task.create');
     Route::post('/task/create', [TaskController::class, 'store'])->name('task.store');
+    Route::get('/task/edit/{task}', [TaskController::class, 'edit'])->name('task.edit');
+    Route::put('/task/edit/{task}', [TaskController::class, 'update'])->name('task.update');
+    Route::get('/task/show/{task}', [TaskController::class, 'show'])->name('task.show');
+    Route::delete('/task/delete/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
 });
 
 require __DIR__.'/auth.php';
