@@ -61,6 +61,21 @@ class TaskController extends Controller
         return view("tasks.show", compact('task'));
     }
 
+    public function status(Task $task)
+    {
+        return view("tasks.status", compact('task'));
+    }
+
+    public function statusUpdate(TaskRequest $request,Task $task)
+    {
+        $task = $this->taskService->statusUpdate($request, $task);
+
+        if ($task) {
+            return redirect()->route('dashboard')->with('message', 'status updated successfully');
+        } else {
+            return redirect()->back()->with('error', 'something went wrong');
+        }
+    }
     public function update(TaskRequest $request,Task $task)
     {
         $task = $this->taskService->update($request, $task);

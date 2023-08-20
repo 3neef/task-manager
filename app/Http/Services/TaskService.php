@@ -19,6 +19,11 @@ class TaskService
         $task->update($request->validated());
         return $task;
     }
+    public function statusUpdate($request, $task)
+    {
+        $task->update($request->validated());
+        return $task;
+    }
 
 
     public  static function destroy($task)

@@ -58,8 +58,8 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($tasks as $task)
+                                <tbody> 
+                                    @forelse ($tasks as $task)
                                     <tr>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <div class="flex items-center">
@@ -93,13 +93,30 @@
                                             </p>
                                         </td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <a href="{{route('task.status', $task->id)}}">
 
-                                            <span
-                                                class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                                <span
+                                                class="relative inline-block px-3 py-1 font-semibold @if ($task->status == 'pending')
+                                                text-gray-900
+                                                @elseif ($task->status == 'done')
+                                                text-green-900
+                                                @else
+                                                text-red-500
+                                                @endif
+                                                 leading-tight">
                                                 <span aria-hidden
-                                                    class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                                class="absolute inset-0
+                                                @if ($task->status == 'pending')
+                                                bg-gray-400
+                                                @elseif ($task->status == 'done')
+                                                bg-green-400
+                                                @else
+                                                bg-red-400
+                                                @endif 
+                                                 opacity-50 rounded-full"></span>
                                                 <span class="relative">{{$task->status}}</span>
                                             </span>
+                                        </a>
                                         </td>
                                         <td>
                                             <div style="display: flex;">
@@ -117,7 +134,15 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                        
+                                        <tr><td></td><td></td><td></td>
+                                            <td>
+
+                                                <h6>No tasks yet!</h6>
+                                            </td>
+                                            </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

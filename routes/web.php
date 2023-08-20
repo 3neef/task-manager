@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/task/edit/{task}', [TaskController::class, 'edit'])->name('task.edit');
     Route::put('/task/edit/{task}', [TaskController::class, 'update'])->name('task.update');
     Route::get('/task/show/{task}', [TaskController::class, 'show'])->name('task.show');
+    Route::get('/task/status/{task}', [TaskController::class, 'status'])->name('task.status');
+    Route::put('/task/status/{task}', [TaskController::class, 'statusUpdate'])->name('task.statusUpdate');
     Route::delete('/task/delete/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
 });
 
